@@ -37,12 +37,18 @@ const routes = [
 function App() {
   return (
     <Router>
-      <nav className="w-full border-b px-6 py-4 flex gap-6 bg-white">
-        {pages.map((page) => (
-          <Link key={page.path} to={page.path} className="hover:underline">
-            {page.name}
-          </Link>
-        ))}
+      <nav className="w-full border-b px-6 py-4 flex items-center gap-6 bg-white">
+        <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+          Logo
+        </div>
+
+        <div className="flex gap-6 ml-auto">
+          {pages.map((page) => (
+            <Link key={page.path} to={page.path} className="hover:underline">
+              {page.name}
+            </Link>
+          ))}
+        </div>
       </nav>
 
       <Routes>
