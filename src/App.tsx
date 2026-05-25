@@ -2,21 +2,57 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import MainPage from './pages/MainPage';
 import ELSIPage from './pages/ELSI';
+import ProjectPage from './pages/Project';
+import DesignPage from './pages/Design';
+import ExperimentPage from './pages/Experiment';
+import TeamPage from './pages/Team';
+import SponsorsPage from './pages/Sponsors';
+import FuturePage from './pages/Future';
+import SimulationPage from './pages/Simulation';
+
+const pages = [
+  { name: "Home", path: "/" },
+  { name: "ELSI", path: "/elsi" },
+  { name: "Project", path: "/project" },
+  { name: "Design", path: "/design" },
+  { name: "Experiments", path: "/experiments" },
+  { name: "Simulations", path: "/simulations" },
+  { name: "Future", path: "/future" },
+  { name: "Sponsors", path: "/sponsors" },
+  { name: "Team", path: "/team" },
+];
+
+const routes = [
+  { path: "/", element: <MainPage /> },
+  { path: "/elsi", element: <ELSIPage /> },
+  { path: "/project", element: <ProjectPage /> },
+  { path: "/design", element: <DesignPage /> },
+  { path: "/team", element: <TeamPage /> },
+  { path: "/sponsors", element: <SponsorsPage /> },
+  { path: "/future", element: <FuturePage /> },
+  { path: "/simulations", element: <SimulationPage /> },
+  { path: "/experiments", element: <ExperimentPage /> },
+];
 
 function App() {
   return (
     <Router>
-        <nav className='w-full border-b px-6 py-4 flex gap-6 bg-white'>
-          <Link to="/" className="hover:underline">
-            Home
+      <nav className="w-full border-b px-6 py-4 flex gap-6 bg-white">
+        {pages.map((page) => (
+          <Link key={page.path} to={page.path} className="hover:underline">
+            {page.name}
           </Link>
-          <Link to="/elsi" className="hover:underline">
-            ELSI
-          </Link>
-        </nav>
+        ))}
+      </nav>
+
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/elsi" element={<ELSIPage />} />
+        {routes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={route.element}
+          />
+        ))}
       </Routes>
     </Router>
   );
