@@ -44,7 +44,11 @@ function App() {
 
         <div className="flex gap-6 ml-auto">
           {pages.map((page) => (
-            <Link key={page.path} to={page.path} className="hover:underline">
+            <Link
+              key={page.path}
+              to={page.path}
+              className="inline-block px-2 py-1 rounded hover:scale-110 hover:bg-gray-100 transition-all duration-200"
+            >
               {page.name}
             </Link>
           ))}
