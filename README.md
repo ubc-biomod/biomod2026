@@ -71,3 +71,7 @@ export default defineConfig([
   },
 ])
 ```
+
+## How to start website locally
+Run `npm install` to install dependencies
+To start the website locally each time, run `npm run dev`
