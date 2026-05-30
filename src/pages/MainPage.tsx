@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
 import dnaImg from "../assets/images/DNA.png";
 import dna2Img from "../assets/images/DNA2.png";
 
@@ -7,12 +5,12 @@ import dna2Img from "../assets/images/DNA2.png";
 // Horizontal: px / 1440 * 100 = vw value
 // Vertical:   px / 917  * 100 = vh value
 
-const NAV_LINKS = [
-  { label: "Home", to: "/" },
-  { label: "Project Ideas", to: "/project-ideas" },
-  { label: "Team", to: "/team" },
-  { label: "Sponsors", to: "/sponsors" },
-];
+// const NAV_LINKS = [
+//   { label: "Home", to: "/" },
+//   { label: "Project Ideas", to: "/project-ideas" },
+//   { label: "Team", to: "/team" },
+//   { label: "Sponsors", to: "/sponsors" },
+// ];
 
 export default function MainPage() {
   return (
@@ -25,71 +23,6 @@ export default function MainPage() {
         overflow: "hidden",
       }}
     >
-      {/* ── Navbar ─────────────────────────────────────────────────── */}
-      {/* Figma: left 88px, top 15px, gap 80px between logo and menu  */}
-      <nav
-        style={{
-          position: "absolute",
-          left: "6.11vw",
-          top: "1.64vh",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "5.56vw",
-        }}
-      >
-        {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          <img
-            src={logo}
-            alt=""
-            style={{ width: "22px", height: "22px", objectFit: "contain" }}
-          />
-          <span
-            style={{
-              fontFamily: "'Krub', sans-serif",
-              fontWeight: 400,
-              fontSize: "clamp(0.9rem, 1.67vw, 1.5rem)",
-              lineHeight: "100%",
-              color: "#2E343F",
-            }}
-          >
-            UBC BIOMOD
-          </span>
-        </div>
-
-        {/* Nav links — Figma: gap 32px, Krub 500 16px letter-spacing 1px */}
-        <ul
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            gap: "2.22vw",
-            listStyle: "none",
-            padding: 0,
-            margin: 0,
-          }}
-        >
-          {NAV_LINKS.map((link) => (
-            <li key={link.label}>
-              <Link
-                to={link.to}
-                style={{
-                  fontFamily: "'Krub', sans-serif",
-                  fontWeight: 500,
-                  fontSize: "clamp(0.75rem, 1.11vw, 1rem)",
-                  lineHeight: "140%",
-                  letterSpacing: "1px",
-                  color: "#2E343F",
-                  textDecoration: "none",
-                }}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
 
       {/* ── Hero Title ─────────────────────────────────────────────── */}
       {/* Figma: left 88px, top 110px, Inter 700 128px, color #000    */}

@@ -39,24 +39,28 @@ function App() {
   return (
     <Router>
       <nav className="w-full border-b px-6 py-4 flex items-center gap-6 bg-white">
-        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          <img
-            src={logo}
-            alt=""
-            style={{ width: "22px", height: "22px", objectFit: "contain" }}
-          />
-          <span
-            style={{
-              fontFamily: "'Krub', sans-serif",
-              fontWeight: 400,
-              fontSize: "clamp(0.9rem, 1.67vw, 1.5rem)",
-              lineHeight: "100%",
-              color: "#2E343F",
-            }}
-          >
-            UBC BIOMOD
-          </span>
-        </div>
+        <Link
+          to="/"
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <img
+              src={logo}
+              alt=""
+              style={{ width: "22px", height: "22px", objectFit: "contain" }}
+            />
+            <span
+              style={{
+                fontFamily: "'Krub', sans-serif",
+                fontWeight: 400,
+                fontSize: "clamp(0.9rem, 1.67vw, 1.5rem)",
+                lineHeight: "100%",
+                color: "#2E343F",
+              }}
+            >
+              UBC BIOMOD
+            </span>
+          </div>
+        </Link>
 
         <div className="flex gap-6 ml-auto">
           {pages.map((page) => (
