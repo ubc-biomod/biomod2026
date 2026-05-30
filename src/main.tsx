@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import Footer from './components/Footer.tsx';
+import Footer from './components/Footer.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -10,17 +10,17 @@ createRoot(document.getElementById('root')!).render(
       <header className="flex-shrink-0">
       </header>
 
-      <main className="flex-grow">  
-          <App />
+      <main className="flex-grow">
+        <App />
       </main>
 
       <footer className="flex-shrink-0">
-        <Footer 
+        <Footer
           links={[
-            {title: "Instagram", href: "https://www.instagram.com/ubcbiomod/?hl=en"}, 
-            {title: "LinkedIn", href: "https://www.linkedin.com/company/ubc-biomod/posts/?feedView=all"},
-            {title: "Website", href: "https://www.ubcbiomod.com"}, 
-          ]} 
+            { title: "Instagram", href: "https://www.instagram.com/ubcbiomod/?hl=en" },
+            { title: "LinkedIn", href: "https://www.linkedin.com/company/ubc-biomod/posts/?feedView=all" },
+            { title: "Website", href: "https://www.ubcbiomod.com" },
+          ]}
         />
       </footer>
     </div>

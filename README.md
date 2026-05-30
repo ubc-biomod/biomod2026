@@ -65,3 +65,7 @@ src/
   main.tsx         # entry point
   index.css        # Tailwind import
 ```
+
+## How to start website locally
+Run `npm install` to install dependencies
+To start the website locally each time, run `npm run dev`
