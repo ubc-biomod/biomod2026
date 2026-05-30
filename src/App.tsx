@@ -9,6 +9,7 @@ import TeamPage from './pages/Team';
 import SponsorsPage from './pages/Sponsors';
 import FuturePage from './pages/Future';
 import SimulationPage from './pages/Simulation';
+import logo from "./assets/images/logo.png";
 
 const pages = [
   { name: "Home", path: "/" },
@@ -38,8 +39,23 @@ function App() {
   return (
     <Router>
       <nav className="w-full border-b px-6 py-4 flex items-center gap-6 bg-white">
-        <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
-          Logo
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <img
+            src={logo}
+            alt=""
+            style={{ width: "22px", height: "22px", objectFit: "contain" }}
+          />
+          <span
+            style={{
+              fontFamily: "'Krub', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(0.9rem, 1.67vw, 1.5rem)",
+              lineHeight: "100%",
+              color: "#2E343F",
+            }}
+          >
+            UBC BIOMOD
+          </span>
         </div>
 
         <div className="flex gap-6 ml-auto">
