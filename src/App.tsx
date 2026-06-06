@@ -38,7 +38,7 @@ const routes = [
 function App() {
   return (
     <Router>
-      <nav className="w-full border-b px-6 py-4 flex items-center gap-6 bg-white">
+      <nav className="w-full border-b px-6 py-4 flex items-center gap-6 bg-white sticky top-0 z-10">
         <Link
           to="/"
         >
