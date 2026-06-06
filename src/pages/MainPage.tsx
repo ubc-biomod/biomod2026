@@ -38,7 +38,7 @@ export default function MainPage() {
           fontWeight: 700,
           fontSize: "clamp(3rem, 8.89vw, 8rem)",
           lineHeight: 1.21,
-          color: "#000000",
+          color: "#524573",
           textShadow: "-5px 5px 4px rgba(0, 0, 0, 0.25)",
         }}
       >
