@@ -45,7 +45,7 @@ import dna2Img from "../assets/images/DNA2.png";
   }> = ({ index, title, description, bg, hero, scrollY }) => {
     const vh = window.innerHeight;
     const cardStart = index * vh;
-    const progress = Math.max(0, Math.min(1, (scrollY - cardStart) / vh));
+    const progress = Math.max(0, Math.min(1, ((scrollY - cardStart) / vh)));
     const translate = progress * -100; // in vh
 
     return (
