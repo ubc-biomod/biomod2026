@@ -2,6 +2,8 @@
 
 Website for the UBC BIOMOD 2026 team, built with React, TypeScript, Vite, and Tailwind CSS.
 
+https://2026.ubcbiomod.com/
+
 ## Stack
 
 - **React 19** + **TypeScript**
