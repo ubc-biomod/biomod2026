@@ -42,10 +42,12 @@ import dna2Img from "../assets/images/DNA2.png";
     bg: string;
     hero: { src: string; left: string; top: string | number; width: string; transform?: string };
     scrollY: number;
-  }> = ({ index, title, description, bg, hero, scrollY }) => {
+    isLast: boolean;
+  }> = ({ index, title, description, bg, hero, scrollY, isLast }) => {
     const vh = window.innerHeight;
     const cardStart = index * vh;
-    const progress = Math.max(0, Math.min(1, ((scrollY - cardStart) / vh)));
+    // the last card stays put so the page scrolls on to the footer instead of revealing an empty stack
+    const progress = isLast ? 0 : Math.max(0, Math.min(1, ((scrollY - cardStart) / vh)));
     const translate = progress * -100; // in vh
 
     return (
@@ -58,7 +60,6 @@ import dna2Img from "../assets/images/DNA2.png";
           alignItems: "center",
           justifyContent: "center",
           transform: `translateY(${translate}vh)`,
-          transition: "transform 120ms linear",
           zIndex: 50 - index,
           overflow: "hidden",
         }}
@@ -125,62 +126,47 @@ import dna2Img from "../assets/images/DNA2.png";
 
   export default function MainPage() {
     const containerRef = useRef<HTMLDivElement | null>(null);
+    // scroll distance into the slide stack, measured from the top of the container (below the nav)
     const [scrollY, setScrollY] = useState<number>(0);
-    const [maxScrollTop, setMaxScrollTop] = useState<number | null>(null);
     const n = CARDS.length;
-
-    // recompute maxScrollTop when layout/resizes happen
-    useEffect(() => {
-      const updateMax = () => {
-        const footer = document.querySelector("footer");
-        if (footer) {
-          const footerTop = footer.getBoundingClientRect().top + window.scrollY;
-          const maxTop = Math.max(0, footerTop - window.innerHeight);
-          setMaxScrollTop(maxTop);
-        } else {
-          setMaxScrollTop(null);
-        }
-      };
-
-      updateMax();
-      window.addEventListener("resize", updateMax);
-      // footer might be added later; check on a short interval then clear
-      const t = setTimeout(updateMax, 250);
-      return () => {
-        window.removeEventListener("resize", updateMax);
-        clearTimeout(t);
-      };
-    }, []);
+    const activeSlide = Math.min(n - 1, Math.round(scrollY / window.innerHeight));
 
     useEffect(() => {
+      let frame = 0;
       const onScroll = () => {
-        let y = window.scrollY;
-        if (maxScrollTop !== null && y > maxScrollTop) {
-          // clamp so user cannot scroll past the point where footer starts showing
-          window.scrollTo({ top: maxScrollTop });
-          y = maxScrollTop;
-        }
-        setScrollY(y);
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const wrapper = containerRef.current;
+          if (!wrapper) return;
+          const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
+          setScrollY(Math.max(0, window.scrollY - containerTop));
+        });
       };
 
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll as any);
-    }, [maxScrollTop]);
+      window.addEventListener("resize", onScroll);
+      return () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+      };
+    }, []);
 
     const goToSlide = (i: number) => {
       const wrapper = containerRef.current;
       if (!wrapper) return;
-      const target = wrapper.offsetTop + i * window.innerHeight;
-      const finalTarget = maxScrollTop !== null ? Math.min(target, maxScrollTop) : target;
-      window.scrollTo({ top: finalTarget, behavior: "smooth" });
+      const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: containerTop + i * window.innerHeight, behavior: "smooth" });
     };
 
+    // the sticky viewport stays pinned for (n - 1) screens of scrolling, one per slide transition;
+    // after that the container ends and the page scrolls normally to the footer
     return (
       <div ref={containerRef} style={{ position: "relative", width: "100%", height: `${n * 100}vh` }}>
         <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
           {CARDS.map((c, i) => (
-            <Card key={c.id} index={i} title={c.title} description={c.description} bg={c.bg} hero={c.hero} scrollY={scrollY} />
+            <Card key={c.id} index={i} title={c.title} description={c.description} bg={c.bg} hero={c.hero} scrollY={scrollY} isLast={i === n - 1} />
           ))}
 
           <div
@@ -192,17 +178,14 @@ import dna2Img from "../assets/images/DNA2.png";
               <button
                 key={c.id}
                 role="tab"
-                aria-selected={Math.round(scrollY / window.innerHeight) === i}
+                aria-selected={activeSlide === i}
                 aria-label={`Go to slide ${c.id}`}
                 onClick={() => goToSlide(i)}
-                style={{ width: Math.round(scrollY / window.innerHeight) === i ? "44px" : "28px", height: "5px", borderRadius: "2px", border: "none", cursor: "pointer", background: Math.round(scrollY / window.innerHeight) === i ? "#524573" : "rgba(82,69,115,0.25)", transition: "width .3s ease, background .3s ease" }}
+                style={{ width: activeSlide === i ? "44px" : "28px", height: "5px", borderRadius: "2px", border: "none", cursor: "pointer", background: activeSlide === i ? "#524573" : "rgba(82,69,115,0.25)", transition: "width .3s ease, background .3s ease" }}
               />
             ))}
           </div>
         </div>
-
-        {/* spacer to allow scrolling through the stack */}
-        <div style={{ height: `${n * 100}vh` }} />
       </div>
     );
   }
