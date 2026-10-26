@@ -5,22 +5,22 @@ import dna2Img from "../assets/images/DNA2.png";
   const CARDS = [
     {
       id: "01",
-      title: ["DNA", "ABUNDANCE", "SORTER"],
+      title: ["RNA", "CANCER", "DETECTIVE"],
       description:
-        "The DNA Abundance Sorter (DAS for short) is a nanostructure that adopts a specific conformation based on relative levels of mRNA transcript in a cell",
+        "Our RNA Cancer Detective helps diagnose ____ cancer subtypes by taking on different conformations based on relative levels of mRNA transcript in a cell",
       bg: "#BCBDEF",
       hero: { src: dnaImg, left: "43.13vw", top: 0, width: "79.22vw", transform: "rotate(90.26deg)" },
     },
     {
       id: "02",
-      title: ["PLACEHOLDER", "TITLE TWO"],
+      title: ["WHAT DOES IT", "EVEN DO?"],
       description: "Placeholder copy for slide two — replace with real project description once it's finalized.",
       bg: "#f5b5c0",
       hero: { src: dna2Img, left: "43vw", top: "8vh", width: "58vw", transform: "rotate(-18deg) scaleX(-1)" },
     },
     {
       id: "03",
-      title: ["PLACEHOLDER", "TITLE THREE"],
+      title: ["WHY IS IT", "IMPORTANT?"],
       description: "Placeholder copy for slide three — swap in real content when it's ready.",
       bg: "#BCBDEF",
       hero: { src: dnaImg, left: "40vw", top: "-3vh", width: "68vw", transform: "rotate(24deg)" },
@@ -28,7 +28,7 @@ import dna2Img from "../assets/images/DNA2.png";
     // New 4th placeholder slide requested
     {
       id: "04",
-      title: ["PLACEHOLDER", "TITLE FOUR"],
+      title: ["PROJECT", "VIDEO"],
       description: "Placeholder copy for slide four — final text and imagery still to come.",
       bg: "#f5b5c0",
       hero: { src: dna2Img, left: "45vw", top: "5vh", width: "60vw", transform: "rotate(10deg)" },
