@@ -2,8 +2,37 @@ import { useEffect, useRef, useState } from "react";
 import dnaImg from "../assets/images/DNA.png";
 import dna2Img from "../assets/images/DNA2.png";
 import Three from "../components/Three";
+import WorldMap from "../components/WorldMap";
+import CountryConfig from "../components/WorldMap";
 
   type Hero = { src: string; left: string; top: string | number; width: string; transform?: string };
+
+
+  const mapData: CountryConfig = {
+    US: {
+      color: "#3b82f6", // Tailwind blue-500
+      info: (
+        <div>
+          <h3 className="font-bold text-lg mb-1">United States</h3>
+          <p className="text-sm">7 Active RNA Projects</p>
+        </div>
+      ),
+    },
+    GB: {
+      color: "#10b981", // Tailwind emerald-500
+      info: (
+        <div>
+          <h3 className="font-bold text-lg mb-1">United Kingdom</h3>
+          <p className="text-sm">12 Clinical Trials</p>
+        </div>
+      ),
+    },
+    FR: {
+      color: "#f43f5e", // Tailwind rose-500
+      info: <strong>France - Research Hub</strong>,
+    },
+  };
+
 
   const CARDS: Array<{
     id: string;
@@ -30,7 +59,13 @@ import Three from "../components/Three";
       title: ["WHAT DOES IT", "EVEN DO?"],
       description: "Placeholder copy for slide two — replace with real project description once it's finalized.",
       bg: "#f5b5c0",
-      hero: { src: dna2Img, left: "43vw", top: "8vh", width: "58vw", transform: "rotate(-18deg) scaleX(-1)" },
+      hero: { src: dna2Img, left: "43vw", top: "8vh", width: "58vw" },
+      children: (
+        <WorldMap 
+          data={mapData} 
+          defaultColor="#e2e8f0" // Customize the non-active country color
+        />
+      )
     },
     {
       id: "03",
