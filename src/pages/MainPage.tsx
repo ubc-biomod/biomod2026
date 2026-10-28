@@ -1,15 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import dnaImg from "../assets/images/DNA.png";
 import dna2Img from "../assets/images/DNA2.png";
+import Three from "../components/Three";
 
-  const CARDS = [
+  type Hero = { src: string; left: string; top: string | number; width: string; transform?: string };
+
+  const CARDS: Array<{
+    id: string;
+    title: string[];
+    description: string;
+    bg: string;
+    hero?: Hero;
+    children?: React.ReactNode;
+  }> = [
     {
       id: "01",
       title: ["RNA", "CANCER", "DETECTIVE"],
       description:
         "Our RNA Cancer Detective helps diagnose ____ cancer subtypes by taking on different conformations based on relative levels of mRNA transcript in a cell",
       bg: "#BCBDEF",
-      hero: { src: dnaImg, left: "43.13vw", top: 0, width: "79.22vw", transform: "rotate(90.26deg)" },
+      children: (
+        <div className="w-full mt-30 mr-30 flex justify-center">
+            <Three />
+        </div>
+      )
     },
     {
       id: "02",
@@ -31,7 +45,16 @@ import dna2Img from "../assets/images/DNA2.png";
       title: ["PROJECT", "VIDEO"],
       description: "Placeholder copy for slide four — final text and imagery still to come.",
       bg: "#f5b5c0",
-      hero: { src: dna2Img, left: "45vw", top: "5vh", width: "60vw", transform: "rotate(10deg)" },
+      hero: { src: dna2Img, left: "35vw", top: "20vh", width: "60vw"},
+      children: (
+        <div className="w-full flex justify-center">
+          <iframe
+            title="Project video"
+            src="https://www.youtube.com/embed/krcnwXdkRuU?si=3uzEiIuDTUkkHPDK"
+            className="sm:w-4/5 lg:w-3/4 aspect-video rounded-xl drop-shadow hover:drop-shadow-xl hover:scale-101 transition-all duration-300"
+          />
+        </div>
+      ),
     },
   ];
 
@@ -40,10 +63,11 @@ import dna2Img from "../assets/images/DNA2.png";
     title: string[];
     description: string;
     bg: string;
-    hero: { src: string; left: string; top: string | number; width: string; transform?: string };
+    hero?: Hero;
+    children?: React.ReactNode;
     scrollY: number;
     isLast: boolean;
-  }> = ({ index, title, description, bg, hero, scrollY, isLast }) => {
+  }> = ({ index, title, description, bg, hero, children, scrollY, isLast }) => {
     const vh = window.innerHeight;
     const cardStart = index * vh;
     // the last card stays put so the page scrolls on to the footer instead of revealing an empty stack
@@ -104,21 +128,32 @@ import dna2Img from "../assets/images/DNA2.png";
             {description}
           </p>
 
-          <img
-            src={hero.src}
-            alt=""
-            aria-hidden="true"
+          <div
             style={{
               position: "absolute",
-              left: hero.left,
-              top: hero.top as any,
-              width: hero.width,
-              transform: hero.transform,
-              height: "auto",
-              pointerEvents: "none",
+              left: hero?.left ?? "45vw",
+              top: hero?.top ?? "5vh",
+              width: hero?.width ?? "60vw",
+              transform: hero?.transform,
+              pointerEvents: "auto",
               willChange: "transform",
             }}
-          />
+          >
+            {children ??
+              (hero ? (
+                <img
+                  src={hero.src}
+                  alt=""
+                  aria-hidden="true"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "auto",
+                    pointerEvents: "none",
+                  }}
+                />
+              ) : null)}
+          </div>
         </div>
       </div>
     );
@@ -166,7 +201,9 @@ import dna2Img from "../assets/images/DNA2.png";
       <div ref={containerRef} style={{ position: "relative", width: "100%", height: `${n * 100}vh` }}>
         <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
           {CARDS.map((c, i) => (
-            <Card key={c.id} index={i} title={c.title} description={c.description} bg={c.bg} hero={c.hero} scrollY={scrollY} isLast={i === n - 1} />
+            <Card key={c.id} index={i} title={c.title} description={c.description} bg={c.bg} hero={c.hero} scrollY={scrollY} isLast={i === n - 1}>
+              {c.children}
+            </Card>
           ))}
 
           <div
