@@ -2,15 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import dnaImg from "../assets/images/DNA.png";
 import dna2Img from "../assets/images/DNA2.png";
 import Three from "../components/Three";
-import WorldMap from "../components/WorldMap";
-import CountryConfig from "../components/WorldMap";
+import WorldMap, { type CountryConfig } from "../components/WorldMap";
 
   type Hero = { src: string; left: string; top: string | number; width: string; transform?: string };
 
 
   const mapData: CountryConfig = {
     US: {
-      color: "#3b82f6", // Tailwind blue-500
+      color: "#f5b5c0", // Tailwind blue-500
       info: (
         <div>
           <h3 className="font-bold text-lg mb-1">United States</h3>
@@ -19,7 +18,7 @@ import CountryConfig from "../components/WorldMap";
       ),
     },
     GB: {
-      color: "#10b981", // Tailwind emerald-500
+      color: "#f5b5c0", // Tailwind emerald-500
       info: (
         <div>
           <h3 className="font-bold text-lg mb-1">United Kingdom</h3>
@@ -28,8 +27,8 @@ import CountryConfig from "../components/WorldMap";
       ),
     },
     FR: {
-      color: "#f43f5e", // Tailwind rose-500
-      info: <strong>France - Research Hub</strong>,
+      color: "#f5b5c0", // Tailwind rose-500
+      info: <strong>France</strong>,
     },
   };
 
@@ -60,19 +59,18 @@ import CountryConfig from "../components/WorldMap";
       description: "Placeholder copy for slide two — replace with real project description once it's finalized.",
       bg: "#f5b5c0",
       hero: { src: dna2Img, left: "43vw", top: "8vh", width: "58vw" },
-      children: (
-        <WorldMap 
-          data={mapData} 
-          defaultColor="#e2e8f0" // Customize the non-active country color
-        />
-      )
     },
     {
       id: "03",
       title: ["WHY IS IT", "IMPORTANT?"],
       description: "Placeholder copy for slide three — swap in real content when it's ready.",
       bg: "#BCBDEF",
-      hero: { src: dnaImg, left: "40vw", top: "-3vh", width: "68vw", transform: "rotate(24deg)" },
+      children: (
+        <WorldMap 
+          data={mapData} 
+          defaultColor="#e2e8f0" // Customize the non-active country color
+        />
+      )
     },
     // New 4th placeholder slide requested
     {

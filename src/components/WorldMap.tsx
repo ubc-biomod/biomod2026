@@ -1,4 +1,5 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState } from "react";
+import type { MouseEvent } from "react";
 
 // Define the shape of the data you want to pass in
 export type CountryConfig = {
@@ -24,12 +25,12 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
   // Handle hover and movement over the map
   const handleMouseMove = (e: MouseEvent<SVGSVGElement>) => {
     const target = e.target as SVGElement;
-    
-    // Check if what we are hovering over is a path (country)
-    if (target.tagName.toLowerCase() === "path") {
-      const countryId = target.id; // MapSVG uses 2-letter ISO codes for IDs (e.g., "US", "CA")
+    const path = target.closest ? target.closest("path") : null;
+    const hoveredPath = (path ?? target) as SVGElement | null;
 
-      // If we passed configuration data for this country ID
+    if (hoveredPath && hoveredPath.tagName.toLowerCase() === "path") {
+      const countryId = hoveredPath.id;
+
       if (countryId && data[countryId]) {
         setTooltip({
           show: true,
@@ -40,8 +41,7 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
         return;
       }
     }
-    
-    // If not hovering over a configured country, hide the tooltip
+
     setTooltip((prev) => ({ ...prev, show: false }));
   };
 
@@ -57,27 +57,45 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
       svg path#${id} {
         fill: ${config.color} !important;
         cursor: pointer;
-        transition: filter 0.2s ease;
+        transition: filter 0.25s ease;
       }
       /* Optional hover effect */
       svg path#${id}:hover {
-        filter: brightness(0.85);
+        filter: brightness(1.1);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
       }
     `
     )
     .join("\n");
 
+  const svgProps: any = {
+    "xmlns:mapsvg": "http://mapsvg.com",
+    "xmlns:dc": "http://purl.org/dc/elements/1.1/",
+    "xmlns:rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xmlns:svg": "http://www.w3.org/2000/svg",
+    xmlns: "http://www.w3.org/2000/svg",
+    "mapsvg:geoViewBox": "-169.110266 83.600842 190.486279 -58.508473",
+    viewBox: "0 0 1009.6727 665.96301",
+    preserveAspectRatio: "xMidYMid meet",
+    style: {
+      position: "relative",
+      zIndex: 1,
+      display: "block",
+      width: "100%",
+      height: "auto",
+      maxWidth: "1000px",
+    },
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave,
+  };
+
   return (
-    <div className="w-full relative">
+    <div className="relative flex w-full justify-center px-4 pt-40">
       {/* Inject custom colors dynamically */}
       <style>
         {`
-          /* Default color for all countries */
           svg path {
             fill: ${defaultColor};
-            stroke: #ffffff;
-            stroke-width: 0.5px;
-            outline: none;
           }
           ${customStyles}
         `}
@@ -85,15 +103,7 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
 
       {/* Paste your SVG from MapSVG below */}
       {/* Make sure to keep onMouseMove and onMouseLeave on the <svg> tag */}
-      <svg
-   xmlns:mapsvg="http://mapsvg.com"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   mapsvg:geoViewBox="-169.110266 83.600842 190.486279 -58.508473"
-   width="1009.6727"
-   height="665.96301">
+      <svg {...svgProps}>
  
   <path
      d="m 479.68275,331.6274 -0.077,0.025 -0.258,0.155 -0.147,0.054 -0.134,0.027 -0.105,-0.011 -0.058,-0.091 0.006,-0.139 -0.024,-0.124 -0.02,-0.067 0.038,-0.181 0.086,-0.097 0.119,-0.08 0.188,0.029 0.398,0.116 0.083,0.109 10e-4,0.072 -0.073,0.119 z"
@@ -1126,13 +1136,10 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
       {tooltip.show && (
         <div
           style={{
-            position: "fixed",
-            top: tooltip.y + 15,
-            left: tooltip.x + 15,
             pointerEvents: "none", // Ensures tooltip doesn't block mouse events
             zIndex: 1000,
           }}
-          className="bg-white text-slate-800 px-4 py-3 rounded-lg shadow-lg border border-slate-200 min-w-[150px]"
+          className="fixed bg-white text-slate-800 px-4 py-3 rounded-lg shadow-lg border border-slate-200 min-w-[150px]"
         >
           {tooltip.content}
         </div>
