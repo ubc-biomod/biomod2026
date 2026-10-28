@@ -55,9 +55,6 @@ export default function Three() {
     directionalLight.position.set(-0.5, 0.2, 1).normalize();
     scene.add(directionalLight);
 
-    // Helper to check if screen is mobile
-    const isMobile = () => window.innerWidth < 1024;
-
     function animate() {
       requestAnimationFrame(animate);
 
