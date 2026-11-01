@@ -1,261 +1,235 @@
 import { useEffect, useRef, useState } from "react";
-import dnaImg from "../assets/images/DNA.png";
 import dna2Img from "../assets/images/DNA2.png";
 import Three from "../components/Three";
 import WorldMap, { type CountryConfig } from "../components/WorldMap";
 
-  type Hero = { src: string; left: string; top: string | number; width: string; transform?: string };
+type Hero = {
+  src: string;
+  className?: string;
+};
 
+const mapData: CountryConfig = {
+  US: {
+    color: "#f5b5c0",
+    info: (
+      <div>
+        <h3 className="mb-1 text-lg font-bold">United States</h3>
+        <p className="text-sm">7 Active RNA Projects</p>
+      </div>
+    ),
+  },
+  GB: {
+    color: "#f5b5c0",
+    info: (
+      <div>
+        <h3 className="mb-1 text-lg font-bold">United Kingdom</h3>
+        <p className="text-sm">12 Clinical Trials</p>
+      </div>
+    ),
+  },
+  FR: {
+    color: "#f5b5c0",
+    info: <strong>France</strong>,
+  },
+};
 
-  const mapData: CountryConfig = {
-    US: {
-      color: "#f5b5c0", // Tailwind blue-500
-      info: (
-        <div>
-          <h3 className="font-bold text-lg mb-1">United States</h3>
-          <p className="text-sm">7 Active RNA Projects</p>
-        </div>
-      ),
-    },
-    GB: {
-      color: "#f5b5c0", // Tailwind emerald-500
-      info: (
-        <div>
-          <h3 className="font-bold text-lg mb-1">United Kingdom</h3>
-          <p className="text-sm">12 Clinical Trials</p>
-        </div>
-      ),
-    },
-    FR: {
-      color: "#f5b5c0", // Tailwind rose-500
-      info: <strong>France</strong>,
-    },
-  };
-
-
-  const CARDS: Array<{
-    id: string;
-    title: string[];
-    description: string;
-    bg: string;
-    hero?: Hero;
-    children?: React.ReactNode;
-  }> = [
-    {
-      id: "01",
-      title: ["RNA", "CANCER", "DETECTIVE"],
-      description:
-        "Our RNA Cancer Detective helps diagnose ____ cancer subtypes by taking on different conformations based on relative levels of mRNA transcript in a cell",
-      bg: "#BCBDEF",
-      children: (
-        <div className="w-full mt-30 mr-30 flex justify-center">
-            <Three />
-        </div>
-      )
-    },
-    {
-      id: "02",
-      title: ["WHAT DOES IT", "EVEN DO?"],
-      description: "Placeholder copy for slide two — replace with real project description once it's finalized.",
-      bg: "#f5b5c0",
-      hero: { src: dna2Img, left: "43vw", top: "8vh", width: "58vw" },
-    },
-    {
-      id: "03",
-      title: ["WHY IS IT", "IMPORTANT?"],
-      description: "Placeholder copy for slide three — swap in real content when it's ready.",
-      bg: "#BCBDEF",
-      children: (
-        <WorldMap 
-          data={mapData} 
-          defaultColor="#e2e8f0" // Customize the non-active country color
+const CARDS: Array<{
+  id: string;
+  title: string[];
+  description: string;
+  bg: string;
+  hero?: Hero;
+  children?: React.ReactNode;
+}> = [
+  {
+    id: "01",
+    title: ["RNA", "CANCER", "DETECTIVE"],
+    description:
+      "Our RNA Cancer Detective helps diagnose ____ cancer subtypes by taking on different conformations based on relative levels of mRNA transcript in a cell",
+    bg: "#BCBDEF",
+    children: (
+      <div className="flex w-full items-center justify-center">
+        <Three />
+      </div>
+    ),
+  },
+  {
+    id: "02",
+    title: ["WHAT", "DOES IT", "EVEN DO?"],
+    description: "Placeholder copy for slide two — replace with real project description once it's finalized.",
+    bg: "#f5b5c0",
+    hero: { src: dna2Img, className: "w-full max-w-[760px]" },
+  },
+  {
+    id: "03",
+    title: ["WHY IS IT", "IMPORTANT?"],
+    description: "Placeholder copy for slide three — swap in real content when it's ready.",
+    bg: "#BCBDEF",
+    children: (
+      <div className="w-full max-w-[1000px]">
+        <WorldMap data={mapData} defaultColor="#e2e8f0" />
+      </div>
+    ),
+  },
+  {
+    id: "04",
+    title: ["PROJECT", "VIDEO"],
+    description: "Placeholder copy for slide four — final text and imagery still to come.",
+    bg: "#f5b5c0",
+    hero: { src: dna2Img, className: "w-full max-w-[760px]" },
+    children: (
+      <div className="flex w-full justify-center">
+        <iframe
+          title="Project video"
+          src="https://www.youtube.com/embed/krcnwXdkRuU?si=3uzEiIuDTUkkHPDK"
+          className="aspect-video w-full max-w-[720px] rounded-xl drop-shadow transition-all duration-300 hover:drop-shadow-xl hover:scale-[1.01]"
         />
-      )
-    },
-    // New 4th placeholder slide requested
-    {
-      id: "04",
-      title: ["PROJECT", "VIDEO"],
-      description: "Placeholder copy for slide four — final text and imagery still to come.",
-      bg: "#f5b5c0",
-      hero: { src: dna2Img, left: "35vw", top: "20vh", width: "60vw"},
-      children: (
-        <div className="w-full flex justify-center">
-          <iframe
-            title="Project video"
-            src="https://www.youtube.com/embed/krcnwXdkRuU?si=3uzEiIuDTUkkHPDK"
-            className="sm:w-4/5 lg:w-3/4 aspect-video rounded-xl drop-shadow hover:drop-shadow-xl hover:scale-101 transition-all duration-300"
-          />
-        </div>
-      ),
-    },
-  ];
+      </div>
+    ),
+  },
+];
 
-  const Card: React.FC<{
-    index: number;
-    title: string[];
-    description: string;
-    bg: string;
-    hero?: Hero;
-    children?: React.ReactNode;
-    scrollY: number;
-    isLast: boolean;
-  }> = ({ index, title, description, bg, hero, children, scrollY, isLast }) => {
-    const vh = window.innerHeight;
-    const cardStart = index * vh;
-    // the last card stays put so the page scrolls on to the footer instead of revealing an empty stack
-    const progress = isLast ? 0 : Math.max(0, Math.min(1, ((scrollY - cardStart) / vh)));
-    const translate = progress * -100; // in vh
+const Card: React.FC<{
+  index: number;
+  title: string[];
+  description: string;
+  bg: string;
+  hero?: Hero;
+  children?: React.ReactNode;
+  scrollY: number;
+  isLast: boolean;
+}> = ({ index, title, description, bg, hero, children, scrollY, isLast }) => {
+  const vh = window.innerHeight;
+  const cardStart = index * vh;
+  const progress = isLast ? 0 : Math.max(0, Math.min(1, (scrollY - cardStart) / vh));
+  const translate = progress * -100;
 
-    return (
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: bg,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: `translateY(${translate}vh)`,
-          zIndex: 50 - index,
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+  return (
+    <div
+      className="absolute inset-0 flex overflow-hidden"
+      style={{
+        background: bg,
+        transform: `translateY(${translate}vh)`,
+        zIndex: 50 - index,
+      }}
+    >
+      <div className="grid h-screen w-full grid-cols-1 gap-6 px-6 py-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10 lg:px-12 xl:px-20">
+        <div className="flex flex-col justify-center lg:pt-16">
           <h1
+            className="m-0 font-sans font-bold leading-[1.21] text-[#524573]"
             style={{
-              position: "absolute",
-              left: "6.11vw",
-              top: "11.99vh",
-              margin: 0,
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(3rem, 8.89vw, 8rem)",
-              lineHeight: 1.21,
-              color: "#524573",
+              fontSize: "clamp(3rem, 7vw, 8rem)",
               textShadow: "-5px 5px 4px rgba(0,0,0,0.25)",
+              letterSpacing: "-0.04em",
             }}
           >
             {title.map((t, i) => (
-              <span key={i} style={{ display: "block" }}>
+              <span key={i} className="block">
                 {t}
               </span>
             ))}
           </h1>
 
           <p
+            className="mt-8 max-w-[42rem] font-[Krub] font-medium text-[#664381]"
             style={{
-              position: "absolute",
-              left: "6.39vw",
-              top: "64.89vh",
-              width: "clamp(200px, 42.78vw, 616px)",
-              margin: 0,
-              fontFamily: "'Krub', sans-serif",
-              fontWeight: 500,
               fontSize: "clamp(0.875rem, 1.39vw, 1.25rem)",
               lineHeight: "1.3",
               letterSpacing: "-0.05em",
-              color: "#664381",
             }}
           >
             {description}
           </p>
+        </div>
 
-          <div
-            style={{
-              position: "absolute",
-              left: hero?.left ?? "45vw",
-              top: hero?.top ?? "5vh",
-              width: hero?.width ?? "60vw",
-              transform: hero?.transform,
-              pointerEvents: "auto",
-              willChange: "transform",
-            }}
-          >
-            {children ??
-              (hero ? (
-                <img
-                  src={hero.src}
-                  alt=""
-                  aria-hidden="true"
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    height: "auto",
-                    pointerEvents: "none",
-                  }}
-                />
-              ) : null)}
-          </div>
+        <div className="flex items-center justify-center lg:justify-end">
+          {children ??
+            (hero ? (
+              <img
+                src={hero.src}
+                alt=""
+                aria-hidden="true"
+                className={`${hero.className ?? "w-full max-w-[760px]"} block h-auto select-none pointer-events-none`}
+              />
+            ) : null)}
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  export default function MainPage() {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    // scroll distance into the slide stack, measured from the top of the container (below the nav)
-    const [scrollY, setScrollY] = useState<number>(0);
-    const n = CARDS.length;
-    const activeSlide = Math.min(n - 1, Math.round(scrollY / window.innerHeight));
+export default function MainPage() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [scrollY, setScrollY] = useState<number>(0);
+  const n = CARDS.length;
+  const activeSlide = Math.min(n - 1, Math.round(scrollY / window.innerHeight));
 
-    useEffect(() => {
-      let frame = 0;
-      const onScroll = () => {
-        cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(() => {
-          const wrapper = containerRef.current;
-          if (!wrapper) return;
-          const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
-          setScrollY(Math.max(0, window.scrollY - containerTop));
-        });
-      };
-
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-      return () => {
-        cancelAnimationFrame(frame);
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
-      };
-    }, []);
-
-    const goToSlide = (i: number) => {
-      const wrapper = containerRef.current;
-      if (!wrapper) return;
-      const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: containerTop + i * window.innerHeight, behavior: "smooth" });
+  useEffect(() => {
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const wrapper = containerRef.current;
+        if (!wrapper) return;
+        const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
+        setScrollY(Math.max(0, window.scrollY - containerTop));
+      });
     };
 
-    // the sticky viewport stays pinned for (n - 1) screens of scrolling, one per slide transition;
-    // after that the container ends and the page scrolls normally to the footer
-    return (
-      <div ref={containerRef} style={{ position: "relative", width: "100%", height: `${n * 100}vh` }}>
-        <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
-          {CARDS.map((c, i) => (
-            <Card key={c.id} index={i} title={c.title} description={c.description} bg={c.bg} hero={c.hero} scrollY={scrollY} isLast={i === n - 1}>
-              {c.children}
-            </Card>
-          ))}
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
-          <div
-            role="tablist"
-            aria-label="Slide navigation"
-            style={{ position: "absolute", right: "28px", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", gap: "10px", zIndex: 200 }}
+  const goToSlide = (i: number) => {
+    const wrapper = containerRef.current;
+    if (!wrapper) return;
+    const containerTop = wrapper.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: containerTop + i * window.innerHeight, behavior: "smooth" });
+  };
+
+  return (
+    <div ref={containerRef} className="relative w-full" style={{ height: `${n * 100}vh` }}>
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {CARDS.map((c, i) => (
+          <Card
+            key={c.id}
+            index={i}
+            title={c.title}
+            description={c.description}
+            bg={c.bg}
+            hero={c.hero}
+            scrollY={scrollY}
+            isLast={i === n - 1}
           >
-            {CARDS.map((c, i) => (
-              <button
-                key={c.id}
-                role="tab"
-                aria-selected={activeSlide === i}
-                aria-label={`Go to slide ${c.id}`}
-                onClick={() => goToSlide(i)}
-                style={{ width: activeSlide === i ? "44px" : "28px", height: "5px", borderRadius: "2px", border: "none", cursor: "pointer", background: activeSlide === i ? "#524573" : "rgba(82,69,115,0.25)", transition: "width .3s ease, background .3s ease" }}
-              />
-            ))}
-          </div>
+            {c.children}
+          </Card>
+        ))}
+
+        <div
+          role="tablist"
+          aria-label="Slide navigation"
+          className="absolute right-7 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-2.5"
+        >
+          {CARDS.map((c, i) => (
+            <button
+              key={c.id}
+              role="tab"
+              aria-selected={activeSlide === i}
+              aria-label={`Go to slide ${c.id}`}
+              onClick={() => goToSlide(i)}
+              className={`rounded-full border-0 transition-all duration-300 ${
+                activeSlide === i ? "h-2.5 w-11 bg-[#524573]" : "h-1.5 w-7 bg-[#524573]/25"
+              }`}
+            />
+          ))}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
