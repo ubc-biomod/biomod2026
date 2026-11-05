@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import hallamImg from "../assets/images/HallamSteven.png";
 
 type TeamMember = {
   name: string;
   role: string;
   description: string;
   accent: string;
+  image?: string;
+  imagePosition?: string;
 };
 
 const createPlaceholderImage = (initials: string, accent: string) => {
@@ -69,6 +72,14 @@ const teamMembers: TeamMember[] = [
     description: "A Short Description",
     accent: "#e57373",
   },
+  {
+    name: "Dr. Hallam",
+    role: "Advisor",
+    description: "A Short Description",
+    accent: "#000000",
+    image: hallamImg,
+    imagePosition: "center 20%",
+  },
 ];
 
 function TeamPage() {
@@ -118,9 +129,16 @@ function TeamPage() {
             <div className="team-card__inner">
               <div className="team-card__face team-card__face--front">
                 <img
-                  src={createPlaceholderImage(member.name.split(" ").map((part) => part[0]).join(""), member.accent)}
+                  src={
+                    member.image ||
+                    createPlaceholderImage(member.name.split(" ").map((part) => part[0]).join(""), member.accent)
+                  }
                   alt={member.name}
                   className="team-card__image"
+                  style={{ 
+                    objectPosition: member.imagePosition ||
+                    "center"
+                    }}
                 />
                 <div className="team-card__content">
                   <h2>{member.name}</h2>
