@@ -51,9 +51,14 @@ body {
 
 .team-grid {
   width: min(1200px, 100%);
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.25rem;
+}
+
+.team-card {
+  flex: 0 0 calc((100% - 3.75rem) / 4);
 }
 
 .team-secret-card {
@@ -170,8 +175,8 @@ body {
 }
 
 @media (max-width: 900px) {
-  .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .team-card {
+    flex-basis: calc((100% - 1.25rem) / 2);
   }
 }
 
@@ -181,7 +186,11 @@ body {
   }
 
   .team-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .team-card {
+    flex-basis: auto;
   }
 
   .team-secret-card {
