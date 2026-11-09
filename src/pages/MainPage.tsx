@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import dna2Img from "../assets/images/DNA2.png";
 import Three from "../components/Three";
 import WorldMap, { type CountryConfig } from "../components/WorldMap";
+import BarChart from "../components/BarChart";
 
 type Hero = {
   src: string;
@@ -9,11 +10,11 @@ type Hero = {
 };
 
 const mapData: CountryConfig = {
-  US: {
+  CA: {
     color: "#f5b5c0",
     info: (
       <div>
-        <h3 className="mb-1 text-lg font-bold">United States</h3>
+        <h3 className="mb-1 text-lg font-bold">Canada - High Income</h3>
         <p className="text-sm">7 Active RNA Projects</p>
       </div>
     ),
@@ -63,11 +64,12 @@ const CARDS: Array<{
   {
     id: "03",
     title: ["WHY IS IT", "IMPORTANT?"],
-    description: "Placeholder copy for slide three — swap in real content when it's ready.",
+    description: "The Mortality/Incidence Ratio of cancer is much higher in lower income countries, in large due to a reduced capacity to detect cancer early on.",
     bg: "#BCBDEF",
     children: (
       <div className="w-full max-w-[1000px]">
-        <WorldMap data={mapData} defaultColor="#e2e8f0" />
+        {/* <WorldMap data={mapData} defaultColor="#e2e8f0" /> */}
+        <BarChart />
       </div>
     ),
   },
