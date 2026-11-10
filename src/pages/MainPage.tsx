@@ -46,7 +46,7 @@ const CARDS: Array<{
     id: "01",
     title: ["RNA", "CANCER", "DETECTIVE"],
     description:
-      "Our RNA Cancer Detective helps diagnose ____ cancer subtypes by taking on different conformations based on relative levels of mRNA transcript in a cell",
+      "Our RNA Cancer Detective helps diagnose lung cancer subtypes by taking on different conformations based on relative levels of mRNA transcript in a cell",
     bg: "#BCBDEF",
     children: (
       <div className="flex w-full items-center justify-center">
@@ -57,7 +57,7 @@ const CARDS: Array<{
   {
     id: "02",
     title: ["WHAT", "DOES IT", "EVEN DO?"],
-    description: "Placeholder copy for slide two — replace with real project description once it's finalized.",
+    description: "How does our detective determine the subtype?",
     bg: "#f5b5c0",
     hero: { src: dna2Img, className: "w-full max-w-[760px]" },
   },
@@ -76,7 +76,7 @@ const CARDS: Array<{
   {
     id: "04",
     title: ["PROJECT", "VIDEO"],
-    description: "Placeholder copy for slide four — final text and imagery still to come.",
+    description: "Checkout our project video to learn more!",
     bg: "#f5b5c0",
     hero: { src: dna2Img, className: "w-full max-w-[760px]" },
     children: (
