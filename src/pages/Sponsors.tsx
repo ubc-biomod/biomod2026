@@ -14,6 +14,8 @@
 
 import sponsor1Logo from "../assets/sponsors/apsc.webp";
 import sponsor2Logo from "../assets/sponsors/walter_gage.webp";
+import CHBELogo from "../assets/sponsors/CHBE.jpg";
+import SBMELogo from "../assets/sponsors/SBME_UBC.png";
 
 type Tier = "platinum" | "gold" | "bronze" | "past";
 
@@ -27,8 +29,10 @@ type Sponsor = {
 // --- sponsor list: edit this ---
 const sponsors: Sponsor[] = [
   { name: "UBC Applied Science", tier: "bronze", logo: sponsor1Logo, url: "https://apsc.ubc.ca" },
-  { name: "Walter H. Gage Memorial Fund", tier: "bronze", logo: sponsor2Logo, url:"https://students.ubc.ca/campus-life/involved/funding-project/walter-gage-memorial-fund/" },
-  { name: "Hallam Lab", tier: "bronze", url:"https://hallamlab.ca/" },
+  { name: "UBC SBME", tier: "bronze", logo: SBMELogo, url: "https://bme.ubc.ca/" },
+  { name: "UBC CHBE", tier: "bronze", logo: CHBELogo, url: "https://chbe.ubc.ca/" },
+  // { name: "Walter H. Gage Memorial Fund", tier: "bronze", logo: sponsor2Logo, url:"https://students.ubc.ca/campus-life/involved/funding-project/walter-gage-memorial-fund/" },
+  { name: "HALLAM LAB", tier: "bronze", url:"https://hallamlab.ca/" },
 ];
 
 // Links for the two buttons at the bottom
@@ -94,7 +98,7 @@ function TierSection({ tier }: { tier: (typeof tiers)[number] }) {
 
   return (
     <section style={{ width: "90%", marginTop: 30 }}>
-      <div
+      {/* <div
         style={{
           backgroundColor: tier.color,
           display: "flex",
@@ -106,7 +110,7 @@ function TierSection({ tier }: { tier: (typeof tiers)[number] }) {
         }}
       >
         {isPast ? <h1>{tier.label}</h1> : <p>{tier.label}</p>}
-      </div>
+      </div> */}
 
       <div
         style={{
