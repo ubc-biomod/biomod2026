@@ -2,9 +2,7 @@ import HtmlContent from "../components/HtmlContent";
 
 function ExperimentPage() {
   return (
-    <div>
-      <h1>Experiment Page</h1>
-      <p>Welcome to the Experiment page of our application!</p>
+    <div className="py-30 px-20 lg:px-40 xl:px-100">
       <HtmlContent src="/Experiment_page/experiment.html" />
     </div>
   );
