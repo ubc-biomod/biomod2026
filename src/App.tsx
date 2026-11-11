@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import ELSIPage from './pages/ELSI';
 import ProjectPage from './pages/Project';
-import DesignPage from './pages/Design';
 import ExperimentPage from './pages/Experiment';
 import TeamPage from './pages/Team';
 import SponsorsPage from './pages/Sponsors';
