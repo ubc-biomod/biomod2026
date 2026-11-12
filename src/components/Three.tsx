@@ -28,7 +28,7 @@ export default function Three() {
     let model: THREE.Object3D | undefined; // Declare the variable to store the model
 
     loader.load(
-      "/dubois_add_to_gmod.glb", // Path to the .glb file
+      "/biomod_detective.glb", // Path to the .glb file
       (gltf: GLTF) => {
         model = gltf.scene; // Assign the loaded scene to the `model` variable
         scene.add(model); // Add the model to the scene
@@ -44,7 +44,7 @@ export default function Three() {
     // loader.load("/Guitar.glb");
 
     camera.position.z = 10;
-    camera.position.y = 3;
+    camera.position.y = 2.2;
     camera.position.x = 0.8;
     // camera.up.set(0, -1, 0);
 
