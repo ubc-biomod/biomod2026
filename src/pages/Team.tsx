@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import hallamImg from "../assets/images/HallamSteven.png";
 import YadavImg from "../assets/images/Yadav.jpg";
 import LuciaImg from "../assets/images/lucia.webp";
-import AbiolaImg from "../assets/images/team/Abiola_Ajibola.png";
+import AbiolaImg from "../assets/images/team/Abiola.jpg";
+import GeorgeImg from "../assets/images/team/george.jpg";
 import CooperImg from "../assets/images/team/Cooper_Nam.jpg";
 import KevinImg from "../assets/images/team/kevin.jpeg";
 import JisongImg from "../assets/images/team/Jisong_Han.jpg";
@@ -43,7 +44,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Abiola",
     role: "Wetlab",
-    description: "T-shirt design mastermind",
+    description: "T-shirts & Travel mastermind",
     image: AbiolaImg,
     accent: "#3aa6b9",
   },
@@ -51,6 +52,7 @@ const teamMembers: TeamMember[] = [
     name: "George",
     role: "Computational and Finance",
     description: "The Bread winner",
+    image: GeorgeImg,
     accent: "#ff8e72",
   },
   {
