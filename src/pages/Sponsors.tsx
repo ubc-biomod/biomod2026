@@ -35,8 +35,8 @@ const sponsors: Sponsor[] = [
 ];
 
 // Links for the two buttons at the bottom
-const SPONSORSHIP_PACKAGE_URL = ""; // e.g. a PDF in /public, like "/sponsorship-package.pdf"
-const BECOME_A_SPONSOR_URL = ""; // e.g. "mailto:team@ubcbiomod.com"
+// const SPONSORSHIP_PACKAGE_URL = ""; // e.g. a PDF in /public, like "/sponsorship-package.pdf"
+// const BECOME_A_SPONSOR_URL = ""; // e.g. "mailto:team@ubcbiomod.com"
 
 // Order and look of each section
 const tiers: { key: Tier; label: string; color: string; logoHeight: number }[] = [
@@ -127,14 +127,14 @@ function TierSection({ tier }: { tier: (typeof tiers)[number] }) {
 }
 
 function SponsorsPage() {
-  const buttonStyle = {
-    marginInline: 30,
-    marginBlock: 10,
-    padding: 10,
-    backgroundColor: "#664381",
-    color: "#FFFFFF",
-    display: "inline-block",
-  };
+  // const buttonStyle = {
+  //   marginInline: 30,
+  //   marginBlock: 10,
+  //   padding: 10,
+  //   backgroundColor: "#664381",
+  //   color: "#FFFFFF",
+  //   display: "inline-block",
+  // };
 
   return (
     <div
