@@ -345,7 +345,7 @@ const Card: React.FC<{
       >
         <div className="flex flex-col justify-center lg:pt-16">
           <h1
-            className="m-0 font-sans font-bold leading-[1.21] text-[#524573] text-6xl md:text-8xl lg:text-9xl"
+            className="m-0 font-sans font-bold leading-[1.21] text-[#524573] text-6xl md:text-7xl lg:text-8xl"
             style={{
               // fontSize: "clamp(3rem, 7vw, 8rem)",
               textShadow: "-5px 5px 4px rgba(0,0,0,0.25)",

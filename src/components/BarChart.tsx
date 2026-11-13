@@ -42,12 +42,12 @@ export default function BarChart() {
 
       <div className="flex flex-col gap-3">
         <div className="flex items-center font-semibold uppercase ">
-          <p className="text-[0.62rem] text-[#524573]/60">gross national income <br /> per capita (USD)</p>
+          <p className="text-[0.62rem] text-[#524573]/60">gross national income per capita (USD)</p>
         </div>
 
         <div className="space-y-3">
           {bars.map((bar) => (
-            <div key={bar.label} className="group flex items-center gap-3 sm:gap-4">
+            <div key={bar.label} className="group flex items-center sm:gap-2">
               <div className="w-24 shrink-0 text-right font-semibold uppercase tracking-[0.12em]">
                 <h3 className="text-[0.67rem] text-[#524573]/80">{bar.label}</h3>
                 <p className="text-[0.55rem] text-[#524573]/70">{bar.subtitle}</p>
