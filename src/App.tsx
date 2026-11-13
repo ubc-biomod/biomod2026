@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import ELSIPage from './pages/ELSI';
 import ProjectPage from './pages/Project';
-import DesignPage from './pages/Design';
 import ExperimentPage from './pages/Experiment';
 import TeamPage from './pages/Team';
 import SponsorsPage from './pages/Sponsors';
@@ -13,24 +12,24 @@ import logo from "./assets/images/logo.png";
 
 const pages = [
   { name: "Home", path: "/" },
-  { name: "ELSI", path: "/elsi" },
   { name: "Project", path: "/project" },
-  { name: "Design", path: "/design" },
+  // { name: "Design", path: "/design" },
   { name: "Experiments", path: "/experiments" },
   { name: "Simulations", path: "/simulations" },
   { name: "Future", path: "/future" },
+  { name: "ELSI", path: "/elsi" },
   { name: "Sponsors", path: "/sponsors" },
   { name: "Team", path: "/team" },
 ];
 
 const routes = [
   { path: "/", element: <MainPage /> },
-  { path: "/elsi", element: <ELSIPage /> },
   { path: "/project", element: <ProjectPage /> },
-  { path: "/design", element: <DesignPage /> },
+  // { path: "/design", element: <DesignPage /> },
   { path: "/team", element: <TeamPage /> },
   { path: "/sponsors", element: <SponsorsPage /> },
   { path: "/future", element: <FuturePage /> },
+  { path: "/elsi", element: <ELSIPage /> },
   { path: "/simulations", element: <SimulationPage /> },
   { path: "/experiments", element: <ExperimentPage /> },
 ];

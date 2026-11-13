@@ -2,6 +2,25 @@ import { useEffect, useState } from "react";
 
 const slug = (s: string) => s.trim().replace(/\s+/g, "-").toLowerCase();
 
+const normalizeRelativeUrls = (doc: Document, sourceUrl: string) => {
+  const base = new URL(sourceUrl, window.location.href);
+
+  doc.querySelectorAll("img[src], source[src], video[src], audio[src], a[href]").forEach((el) => {
+    const attr = el.tagName === "A" ? "href" : "src";
+    const value = el.getAttribute(attr);
+
+    if (!value || value.startsWith("#") || value.startsWith("data:") || /^([a-z]+:)?\/\//i.test(value)) {
+      return;
+    }
+
+    try {
+      el.setAttribute(attr, new URL(value, base).toString());
+    } catch {
+      // Ignore malformed URLs; the browser will handle them as-is.
+    }
+  });
+};
+
 export default function HtmlContent({ src, sections = [] }: { src: string; sections?: string[] }) {
   const [html, setHtml] = useState("");
   const sectionKey = sections.join("|"); // stable string so the effect doesn't loop
@@ -11,6 +30,8 @@ export default function HtmlContent({ src, sections = [] }: { src: string; secti
       .then((r) => r.text())
       .then((raw) => {
         const doc = new DOMParser().parseFromString(raw, "text/html");
+        normalizeRelativeUrls(doc, src);
+
         doc.querySelectorAll("h1, h2, h3").forEach((h) => {
           const text = h.textContent?.trim() ?? "";
           if (sectionKey.split("|").some((s) => s.trim() === text)) h.id = slug(text);

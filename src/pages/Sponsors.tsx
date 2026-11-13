@@ -13,7 +13,6 @@
 // import starfishLogo from "../assets/sponsors/starfish.png";
 
 import sponsor1Logo from "../assets/sponsors/apsc.webp";
-import sponsor2Logo from "../assets/sponsors/walter_gage.webp";
 import CHBELogo from "../assets/sponsors/CHBE.jpg";
 import SBMELogo from "../assets/sponsors/SBME_UBC.png";
 
@@ -93,8 +92,6 @@ function SponsorCard({ sponsor, logoHeight }: { sponsor: Sponsor; logoHeight: nu
 function TierSection({ tier }: { tier: (typeof tiers)[number] }) {
   const list = sponsors.filter((s) => s.tier === tier.key);
   if (list.length === 0) return null;
-
-  const isPast = tier.key === "past";
 
   return (
     <section style={{ width: "90%", marginTop: 30 }}>
