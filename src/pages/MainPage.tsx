@@ -323,6 +323,8 @@ const Card: React.FC<{
   const cardStart = index * vh;
   const progress = isLast ? 0 : Math.max(0, Math.min(1, (scrollY - cardStart) / vh));
   const translate = progress * -100;
+  const fadeIn = Math.max(0, Math.min(1, (scrollY - cardStart + vh * 0.7) / (vh * 0.6)));
+  const contentOffset = (1 - fadeIn) * 24;
 
   return (
     <div
@@ -333,7 +335,14 @@ const Card: React.FC<{
         zIndex: 50 - index,
       }}
     >
-      <div className="grid h-screen w-full grid-cols-1 gap-6 px-6 py-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10 lg:px-12 xl:px-20">
+      <div
+        className="grid h-screen w-full grid-cols-1 gap-6 px-6 py-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-10 lg:px-12 xl:px-20"
+        style={{
+          opacity: fadeIn,
+          transform: `translateY(${contentOffset}px)`,
+          transition: "opacity 0.5s ease-out, transform 0.7s ease-out",
+        }}
+      >
         <div className="flex flex-col justify-center lg:pt-16">
           <h1
             className="m-0 font-sans font-bold leading-[1.21] text-[#524573] text-8xl lg:text-9xl"
