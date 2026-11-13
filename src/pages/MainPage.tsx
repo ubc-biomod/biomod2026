@@ -273,9 +273,11 @@ const CARDS: Array<{
     description: "The Mortality/Incidence Ratio of cancer is much higher in lower income countries, in large due to a reduced capacity to detect cancer early on.",
     bg: "#BCBDEF",
     children: (
-      <div className="w-full max-w-[1000px] flex-column justify-center items-center gap-10">
-        <WorldMap data={mapData} defaultColor="#e2e8f0" />
-        <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm text-[#334155]">
+      <div className="flex w-full max-w-[1200px] flex-col items-center justify-center gap-4">
+        <div className="w-full">
+          <WorldMap data={mapData} defaultColor="#e2e8f0" />
+        </div>
+        <div className="mt-1 flex flex-wrap justify-center gap-3 text-sm text-[#334155]">
           {/* {Object.entries(incomeColors).map(([tier, color]) => (
             <div key={tier} className="flex items-center gap-2 rounded-full border border-[#dbe2f0] bg-white/60 px-3 py-1.5">
               <span className="h-3 w-3 rounded-full" style={{ backgroundColor: color }} />
@@ -283,7 +285,9 @@ const CARDS: Array<{
             </div>
           ))} */}
         </div>
-        <BarChart />
+        <div className="w-full max-w-[700px]">
+          <BarChart />
+        </div>
       </div>
     ),
   },

@@ -84,13 +84,14 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
       width: "60%",
       height: "auto",
       maxWidth: "1000px",
+      margin: "0 auto",
     },
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
   };
 
   return (
-    <div className="relative flex w-full justify-center px-4 pt-40">
+    <div className="relative flex w-full justify-center px-2 pt-0">
       {/* Inject custom colors dynamically */}
       <style>
         {`

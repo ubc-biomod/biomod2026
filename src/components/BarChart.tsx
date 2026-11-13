@@ -30,46 +30,46 @@ export default function BarChart() {
   }, []);
 
   return (
-    <div ref={ref} className="w-full max-w-[860px] rounded-[28px] bg-white/20 p-6 shadow-sm backdrop-blur-sm sm:p-8">
-      <div className="mb-6 flex items-end justify-between gap-4">
+    <div ref={ref} className="w-full max-w-[860px] rounded-[24px] bg-white/20 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+      <div className="mb-4 flex items-end justify-between gap-4">
         <div>
-          <h2 className="mt-2 text-2xl font-bold text-[#524573] sm:text-3xl">Wealth disparities and cancer outcomes</h2>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#524573]/70">
+          <h2 className="mt-1 text-xl font-bold text-[#524573] sm:text-2xl">Wealth disparities and cancer outcomes</h2>
+          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#524573]/70">
             Cancer Mortality/Incidence Ratio vs Gross National Income per capita
           </p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <div className="flex items-center font-semibold uppercase ">
-          <p className="text-xs text-[#524573]/60">gross national income <br /> per capita (USD)</p>
+          <p className="text-[0.62rem] text-[#524573]/60">gross national income <br /> per capita (USD)</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {bars.map((bar) => (
-            <div key={bar.label} className="group flex items-center gap-4 sm:gap-5">
-              <div className="w-28 shrink-0 text-right font-semibold uppercase tracking-[0.18em]">
-                <h3 className="text-[#524573]/80">{bar.label}</h3>
-                <p className="text-xs text-[#524573]/70">{bar.subtitle}</p>
+            <div key={bar.label} className="group flex items-center gap-3 sm:gap-4">
+              <div className="w-24 shrink-0 text-right font-semibold uppercase tracking-[0.12em]">
+                <h3 className="text-[0.67rem] text-[#524573]/80">{bar.label}</h3>
+                <p className="text-[0.55rem] text-[#524573]/70">{bar.subtitle}</p>
               </div>
 
-              <div className="relative h-12 flex-1 rounded-full bg-[#f2edf8]">
+              <div className="relative h-9 flex-1 rounded-full bg-[#f2edf8]">
                 <div
                   className="h-full rounded-full shadow-md transition-all duration-700 ease-out group-hover:brightness-110 group-hover:scale-y-110 group-hover:shadow-lg"
                   style={{
                     width: isVisible ? `${bar.value * 100}%` : "0%",
                     background: bar.color,
-                    boxShadow: "0 12px 20px rgba(82,69,115,0.18)",
+                    boxShadow: "0 10px 16px rgba(82,69,115,0.18)",
                   }}
                 />
               </div>
 
-              <div className="w-16 shrink-0 text-left text-sm font-bold text-[#524573]">{bar.value}</div>
+              <div className="w-12 shrink-0 text-left text-xs font-bold text-[#524573]">{bar.value}</div>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center justify-center pt-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#524573]/60">
+        <div className="flex items-center justify-center pt-1 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#524573]/60">
           <span>Mortality / Incidence</span>
         </div>
       </div>
