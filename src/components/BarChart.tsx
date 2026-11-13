@@ -30,22 +30,22 @@ export default function BarChart() {
   }, []);
 
   return (
-    <div ref={ref} className="w-full max-w-[860px] rounded-[24px] bg-white/20 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+    <div ref={ref} className="w-full max-w-[860px] rounded-[24px] bg-white/20 px-4 py-0 shadow-sm backdrop-blur-sm sm:p-5">
       <div className="mb-4 flex items-end justify-between gap-4">
         <div>
-          <h2 className="mt-1 text-xl font-bold text-[#524573] sm:text-2xl">Wealth disparities and cancer outcomes</h2>
-          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#524573]/70">
+          <h2 className="mt-0 text-xl font-bold text-[#524573] sm:text-2xl">Wealth disparities and cancer outcomes</h2>
+          {/* <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#524573]/70">
             Cancer Mortality/Incidence Ratio vs Gross National Income per capita
-          </p>
+          </p> */}
         </div>
       </div>
 
       <div className="flex flex-col gap-3">
         <div className="flex items-center font-semibold uppercase ">
-          <p className="text-[0.62rem] text-[#524573]/60">gross national income per capita (USD)</p>
+          <p className="text-[0.62rem] text-[#524573]/60">gross national income <br/> per capita (USD)</p>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-1">
           {bars.map((bar) => (
             <div key={bar.label} className="group flex items-center sm:gap-2">
               <div className="w-24 shrink-0 text-right font-semibold uppercase tracking-[0.12em]">

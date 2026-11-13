@@ -62,7 +62,6 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
       /* Optional hover effect */
       svg path#${id}:hover {
         filter: brightness(1.1);
-        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
       }
     `
     )
@@ -77,6 +76,7 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
     "mapsvg:geoViewBox": "-169.110266 83.600842 190.486279 -58.508473",
     viewBox: "0 0 1009.6727 665.96301",
     preserveAspectRatio: "xMidYMid meet",
+    className: "world-map",
     style: {
       position: "relative",
       zIndex: 1,
@@ -91,7 +91,7 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
   };
 
   return (
-    <div className="hidden md:block relative flex w-full justify-center px-2 pt-0">
+    <div className="world-map-container hidden md:block relative flex w-full justify-center px-2 pt-10">
       {/* Inject custom colors dynamically */}
       <style>
         {`

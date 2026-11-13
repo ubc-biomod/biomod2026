@@ -273,7 +273,7 @@ const CARDS: Array<{
     description: "The Mortality/Incidence Ratio of cancer is much higher in lower income countries, in large due to a reduced capacity to detect cancer early on.",
     bg: "#BCBDEF",
     children: (
-      <div className="flex w-full max-w-[1200px] flex-col items-center justify-center gap-4">
+      <div className="flex w-full max-w-[1200px] flex-col items-center justify-center gap-0">
         <div className="w-full">
           <WorldMap data={mapData} defaultColor="#e2e8f0" />
         </div>
