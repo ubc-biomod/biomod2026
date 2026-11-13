@@ -84,7 +84,7 @@ export default function Three() {
     <div className='h-[600px] lg:h-[60vh] overflow-visible w-full'>
       <div
         id="three-container"
-        className={`h-full overflow-visible`}
+        className={`h-1/2 md:h-full overflow-visible`}
       ></div>
     </div>
   );

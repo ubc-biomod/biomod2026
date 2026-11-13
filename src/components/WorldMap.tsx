@@ -91,7 +91,7 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
   };
 
   return (
-    <div className="relative flex w-full justify-center px-2 pt-0">
+    <div className="hidden md:block relative flex w-full justify-center px-2 pt-0">
       {/* Inject custom colors dynamically */}
       <style>
         {`

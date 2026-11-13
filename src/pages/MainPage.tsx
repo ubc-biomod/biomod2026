@@ -345,7 +345,7 @@ const Card: React.FC<{
       >
         <div className="flex flex-col justify-center lg:pt-16">
           <h1
-            className="m-0 font-sans font-bold leading-[1.21] text-[#524573] text-8xl lg:text-9xl"
+            className="m-0 font-sans font-bold leading-[1.21] text-[#524573] text-6xl md:text-8xl lg:text-9xl"
             style={{
               // fontSize: "clamp(3rem, 7vw, 8rem)",
               textShadow: "-5px 5px 4px rgba(0,0,0,0.25)",
@@ -360,7 +360,7 @@ const Card: React.FC<{
           </h1>
 
           <p
-            className="mt-8 max-w-[42rem] font-[Inter] text-[#664381] text-2xl"
+            className="mt-8 max-w-[42rem] font-[Inter] text-[#664381] text-lg md:text-2xl"
             style={{
               // fontSize: "clamp(0.875rem, 1.39vw, 1.75rem)",
               lineHeight: "1.3",
