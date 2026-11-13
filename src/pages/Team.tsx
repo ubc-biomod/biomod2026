@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 import hallamImg from "../assets/images/HallamSteven.png";
+import YadavImg from "../assets/images/Yadav.jpg";
+import LuciaImg from "../assets/images/lucia.webp";
+import AbiolaImg from "../assets/images/team/Abiola.jpg";
+import GeorgeImg from "../assets/images/team/george.jpg";
+import CooperImg from "../assets/images/team/Cooper_Nam.jpg";
+import KevinImg from "../assets/images/team/kevin.jpeg";
+import JisongImg from "../assets/images/team/Jisong_Han.jpg";
+import JulianImg from "../assets/images/team/Julian_Mark-Santos.jpg";
+import JosephImg from "../assets/images/team/Joseph_Deng.jpg";
+import SelinaImg from "../assets/images/team/Selina_Fu.jpg";
 
 type TeamMember = {
   name: string;
@@ -27,60 +37,94 @@ const teamMembers: TeamMember[] = [
   {
     name: "Kevin",
     role: "Team Lead",
-    description: "A Short Description",
+    description: "Shoebill enjoyer and the backbone of the team.",
+    image: KevinImg,
     accent: "#6c63ff",
   },
   {
     name: "Abiola",
     role: "Wetlab",
-    description: "A Short Description",
+    description: "T-shirts & Travel mastermind",
+    image: AbiolaImg,
     accent: "#3aa6b9",
   },
   {
     name: "George",
-    role: "Computational",
-    description: "A Short Description",
+    role: "Computational and Finance",
+    description: "The Bread winner",
+    image: GeorgeImg,
     accent: "#ff8e72",
   },
   {
-    name: "Jack",
+    name: "Cooper",
     role: "Wetlab",
-    description: "A Short Description",
+    description: "Gel electrophoresis enthusiast",
+    image: CooperImg,
     accent: "#7e57c2",
   },
   {
     name: "Jisong",
-    role: "Wetlab",
-    description: "A Short Description",
+    role: "Wetlab and Video",
+    description: "Animation Expert",
+    image: JisongImg,
     accent: "#4caf50",
   },
   {
     name: "Joseph",
     role: "Computational and Website",
-    description: "A Short Description",
+    description: "Keyboard typer",
+    image: JosephImg,
     accent: "#f4b942",
   },
   {
     name: "Julian",
     role: "Computational and Video",
-    description: "A Short Description",
+    description: "Filipino mogger",
+    image: JulianImg,
     accent: "#8d6e63",
   },
   {
     name: "Selina",
     role: "Computational",
-    description: "A Short Description",
+    description: "Simulation Wizard",
+    image: SelinaImg,
     accent: "#e57373",
   },
+];
+
+const Advisors: TeamMember[] = [
   {
     name: "Dr. Hallam",
-    role: "Advisor",
-    description: "A Short Description",
+    role: "Associate Professor",
+    description: "Principal Investigator at Hallam Lab UBC",
     accent: "#000000",
     image: hallamImg,
     imagePosition: "center 20%",
   },
-];
+  {
+    name: "Dr. Vikramaditya G. Yadav",
+    role: "Associate Professor",
+    description: "Director of MEL Program in Sustainable Process Engineering",
+    accent: "#000000",
+    image: YadavImg,
+    imagePosition: "center 20%",
+  },
+  {
+    name: "Lucia Tapia Alamos",
+    role: "Lab Manager",
+    description: "Research Associate/Lab Manager at Hallam Lab UBC",
+    accent: "#000000",
+    image: LuciaImg,
+    imagePosition: "center 20%",
+  },
+  {
+    name: "Marlene Chow",
+    role: "Director of Academic Programs",
+    description: "Director of Academic Programs, Administration and Resources University of British Columbia",
+    accent: "#000000",
+    imagePosition: "center 20%",
+  },
+]
 
 function TeamPage() {
   const [isSecretRevealed, setIsSecretRevealed] = useState(false);
@@ -116,15 +160,46 @@ function TeamPage() {
   return (
     <div className="team-page">
       <div className="team-page__header">
-        <p className="team-page__eyebrow">Meet the Team</p>
-        <h1>Our interdisciplinary group</h1>
-        <p>
-          This team brings together biology, computation, design, and ethics to build the next generation of biomolecular tools.
-        </p>
+        <h1 className="team-page__eyebrow">Meet the Team</h1>
       </div>
 
       <div className="team-grid">
         {teamMembers.map((member) => (
+          <div className="team-card" key={member.name}>
+            <div className="team-card__inner">
+              <div className="team-card__face team-card__face--front">
+                <img
+                  src={
+                    member.image ||
+                    createPlaceholderImage(member.name.split(" ").map((part) => part[0]).join(""), member.accent)
+                  }
+                  alt={member.name}
+                  className="team-card__image"
+                  style={{ 
+                    objectPosition: member.imagePosition ||
+                    "center"
+                    }}
+                />
+                <div className="team-card__content">
+                  <h2>{member.name}</h2>
+                  <p>{member.role}</p>
+                </div>
+              </div>
+
+              <div className="team-card__face team-card__face--back">
+                <p>{member.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="team-page__header mt-10">
+        <h1 className="team-page__eyebrow">Our Advisors</h1>
+      </div>
+
+      <div className="team-grid">
+        {Advisors.map((member) => (
           <div className="team-card" key={member.name}>
             <div className="team-card__inner">
               <div className="team-card__face team-card__face--front">

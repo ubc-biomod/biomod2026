@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import MainPage from './pages/MainPage';
 import ELSIPage from './pages/ELSI';
@@ -18,8 +19,8 @@ const pages = [
   { name: "Simulations", path: "/simulations" },
   { name: "Future", path: "/future" },
   { name: "ELSI", path: "/elsi" },
-  { name: "Sponsors", path: "/sponsors" },
   { name: "Team", path: "/team" },
+  { name: "Sponsors", path: "/sponsors" },
 ];
 
 const routes = [
@@ -35,43 +36,66 @@ const routes = [
 ];
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = pages.map((page) => (
+    <Link
+      key={page.path}
+      to={page.path}
+      onClick={() => setIsMenuOpen(false)}
+      className="inline-block rounded px-2 py-1 transition-all duration-200 hover:scale-110 hover:bg-gray-100"
+    >
+      {page.name}
+    </Link>
+  ));
+
   return (
     <Router>
-      <nav className="w-full border-b px-6 py-4 flex items-center gap-6 bg-white sticky top-0 z-10">
-        <Link
-          to="/"
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            <img
-              src={logo}
-              alt=""
-              style={{ width: "22px", height: "22px", objectFit: "contain" }}
-            />
-            <span
-              style={{
-                fontFamily: "'Krub', sans-serif",
-                fontWeight: 400,
-                fontSize: "clamp(0.9rem, 1.67vw, 1.5rem)",
-                lineHeight: "100%",
-                color: "#2E343F",
-              }}
-            >
-              UBC BIOMOD
-            </span>
-          </div>
-        </Link>
+      <nav className="sticky top-0 z-10 w-full border-b bg-white px-6 py-4">
+        <div className="flex w-full items-center justify-between gap-4">
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="mr-auto flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <img
+                src={logo}
+                alt=""
+                className="h-[22px] w-[22px] object-contain"
+              />
+              <span
+                style={{
+                  fontFamily: "'Krub', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "clamp(0.9rem, 1.67vw, 1.5rem)",
+                  lineHeight: "100%",
+                  color: "#2E343F",
+                }}
+              >
+                UBC BIOMOD
+              </span>
+            </div>
+          </Link>
 
-        <div className="flex gap-6 ml-auto">
-          {pages.map((page) => (
-            <Link
-              key={page.path}
-              to={page.path}
-              className="inline-block px-2 py-1 rounded hover:scale-110 hover:bg-gray-100 transition-all duration-200"
-            >
-              {page.name}
-            </Link>
-          ))}
+          <div className="hidden items-center gap-6 md:flex md:ml-auto md:justify-end">
+            {navItems}
+          </div>
+
+          <button
+            type="button"
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 bg-white text-xl text-slate-700 shadow-sm transition hover:bg-slate-50 md:hidden"
+          >
+            {isMenuOpen ? '✕' : '☰'}
+          </button>
         </div>
+
+        {isMenuOpen && (
+          <div className="border-t border-slate-200 bg-white px-3 pb-3 pt-3 md:hidden">
+            <div className="flex flex-col gap-2">
+              {navItems}
+            </div>
+          </div>
+        )}
       </nav>
 
       <Routes>
