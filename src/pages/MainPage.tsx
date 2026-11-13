@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import dna2Img from "../assets/images/DNA2.png";
+import diagram from "../assets/images/what_does_it_even_do.png";
 import Three from "../components/Three";
 import WorldMap, { type CountryConfig } from "../components/WorldMap";
 import BarChart from "../components/BarChart";
@@ -57,9 +58,9 @@ const CARDS: Array<{
   {
     id: "02",
     title: ["WHAT", "DOES IT", "EVEN DO?"],
-    description: "How does our detective determine the subtype?",
+    description: "Our structure has complement regions for both VIM and CDH1, and takes on a different conformation depending on the combination that is present. Deploying a bunch of these nanostructures in a cell allows us to subtype it using gel electrophoresis to measure the relative levels of each conformation.",
     bg: "#f5b5c0",
-    hero: { src: dna2Img, className: "w-full max-w-[760px]" },
+    hero: { src: diagram, className: "w-full" },
   },
   {
     id: "03",
@@ -84,7 +85,7 @@ const CARDS: Array<{
         <iframe
           title="Project video"
           src="https://www.youtube.com/embed/krcnwXdkRuU?si=3uzEiIuDTUkkHPDK"
-          className="aspect-video w-full max-w-[720px] rounded-xl drop-shadow transition-all duration-300 hover:drop-shadow-xl hover:scale-[1.01]"
+          className="aspect-video w-full rounded-xl drop-shadow transition-all duration-300 hover:drop-shadow-xl hover:scale-[1.01]"
         />
       </div>
     ),
@@ -133,9 +134,9 @@ const Card: React.FC<{
           </h1>
 
           <p
-            className="mt-8 max-w-[42rem] font-[Krub] font-medium text-[#664381]"
+            className="mt-8 max-w-[42rem] font-[Inter] text-[#664381]"
             style={{
-              fontSize: "clamp(0.875rem, 1.39vw, 1.25rem)",
+              fontSize: "clamp(0.875rem, 1.39vw, 1.75rem)",
               lineHeight: "1.3",
               letterSpacing: "-0.05em",
             }}

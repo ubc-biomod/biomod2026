@@ -172,14 +172,14 @@ function SponsorsPage() {
           Want to support our cause? Become a sponsor! Our strong performances in previous BIOMOD
           competitions wouldn't be possible without sponsors like you.
         </p>
-        <div style={{ marginTop: 35 }}>
+        {/* <div style={{ marginTop: 35 }}>
           <a href={SPONSORSHIP_PACKAGE_URL || undefined} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
             SPONSORSHIP PACKAGE
           </a>
           <a href={BECOME_A_SPONSOR_URL || undefined} style={buttonStyle}>
             BECOME A SPONSOR!
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
