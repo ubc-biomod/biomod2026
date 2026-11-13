@@ -2,6 +2,21 @@ import { useEffect, useState } from "react";
 
 const slug = (s: string) => s.trim().replace(/\s+/g, "-").toLowerCase();
 
+const inlineHtmlStyles = `
+  .html-content img {
+    display: inline-block !important;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    margin: 0 0.15em;
+  }
+  .html-content p,
+  .html-content li,
+  .html-content span {
+    overflow-wrap: anywhere;
+  }
+`;
+
 const normalizeRelativeUrls = (doc: Document, sourceUrl: string) => {
   const base = new URL(sourceUrl, window.location.href);
 
@@ -39,7 +54,7 @@ export default function HtmlContent({ src, sections = [] }: { src: string; secti
         const styles = Array.from(doc.head.querySelectorAll("style"))
           .map((s) => s.outerHTML)
           .join("");
-        setHtml(styles + doc.body.innerHTML);
+        setHtml(`<style>${inlineHtmlStyles}</style>${styles}${doc.body.innerHTML}`);
       })
       .catch((e) => console.error(`Failed to load ${src}`, e));
   }, [src, sectionKey]);
