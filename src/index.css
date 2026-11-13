@@ -186,11 +186,20 @@ body {
   }
 
   .team-grid {
+    width: 100%;
     flex-direction: column;
+    align-items: center;
   }
 
   .team-card {
-    flex-basis: auto;
+    width: 100%;
+    max-width: 420px;
+    flex-basis: 100%;
+  }
+
+  .team-card__inner {
+    width: 100%;
+    min-height: 420px;
   }
 
   .team-secret-card {
