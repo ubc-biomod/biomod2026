@@ -81,7 +81,7 @@ export default function WorldMap({ data, defaultColor = "#d3d3d3" }: WorldMapPro
       position: "relative",
       zIndex: 1,
       display: "block",
-      width: "100%",
+      width: "60%",
       height: "auto",
       maxWidth: "1000px",
     },

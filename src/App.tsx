@@ -18,8 +18,8 @@ const pages = [
   { name: "Simulations", path: "/simulations" },
   { name: "Future", path: "/future" },
   { name: "ELSI", path: "/elsi" },
-  { name: "Sponsors", path: "/sponsors" },
   { name: "Team", path: "/team" },
+  { name: "Sponsors", path: "/sponsors" },
 ];
 
 const routes = [
