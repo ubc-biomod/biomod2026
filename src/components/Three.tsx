@@ -25,17 +25,37 @@ export default function Three() {
 
     const loader = new GLTFLoader();
 
-    let model: THREE.Object3D | undefined; // Declare the variable to store the model
+    let model: THREE.Object3D | undefined;
+    const clueModels: THREE.Object3D[] = [];
 
     loader.load(
-      "/biomod_detective.glb", // Path to the .glb file
+      "/biomod_detective.glb",
       (gltf: GLTF) => {
-        model = gltf.scene; // Assign the loaded scene to the `model` variable
-        scene.add(model); // Add the model to the scene
+        model = gltf.scene;
+        scene.add(model);
         console.log("Model loaded successfully:", model);
       },
       undefined
     );
+
+    [
+      { path: "/clue1.glb", position: new THREE.Vector3(-2.3, 0, 0), scale: 1.3 },
+      { path: "/clue2.glb", position: new THREE.Vector3(2.3, 0, 0), scale: 1.3 },
+    ].forEach(({ path, position, scale }) => {
+      loader.load(
+        path,
+        (gltf: GLTF) => {
+          const clueModel = gltf.scene;
+          clueModel.position.copy(position);
+          clueModel.rotation.x = Math.PI / 2;
+          clueModel.scale.setScalar(scale);
+          clueModels.push(clueModel);
+          scene.add(clueModel);
+          console.log("Clue model loaded successfully:", clueModel);
+        },
+        undefined
+      );
+    });
 
     // const geometry = new THREE.BoxGeometry(3, 2, 2);
     // const material = new THREE.MeshBasicMaterial({ color: 0xaaaaaa });
@@ -61,6 +81,11 @@ export default function Three() {
       if (model) {
         model.rotation.y += 0.006;
       }
+
+      clueModels.forEach((clueModel) => {
+        clueModel.rotation.y += 0.006;
+        clueModel.rotation.x = Math.PI / 2;
+      });
 
       renderer.render(scene, camera);
     }
