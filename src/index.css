@@ -11,6 +11,29 @@ body {
   background: linear-gradient(135deg, #f5f3ff 0%, #e9e7ff 100%);
 }
 
+
+@keyframes world-map-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(196, 193, 208, 0.18));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(199, 191, 219, 0.42));
+  }
+}
+
+.world-map {
+  position: relative;
+  animation: world-map-glow 3s ease-in-out infinite;
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .world-map {
+    animation: none;
+  }
+}
+
 .team-page {
   min-height: 100vh;
   padding: 3rem 1.25rem 4rem;

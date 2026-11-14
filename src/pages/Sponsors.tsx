@@ -36,7 +36,7 @@ const sponsors: Sponsor[] = [
 
 // Links for the two buttons at the bottom
 // const SPONSORSHIP_PACKAGE_URL = ""; // e.g. a PDF in /public, like "/sponsorship-package.pdf"
-// const BECOME_A_SPONSOR_URL = ""; // e.g. "mailto:team@ubcbiomod.com"
+const BECOME_A_SPONSOR_URL = "mailto:team@ubcbiomod.com"; // e.g. "mailto:team@ubcbiomod.com"
 
 // Order and look of each section
 const tiers: { key: Tier; label: string; color: string; logoHeight: number }[] = [
@@ -127,14 +127,14 @@ function TierSection({ tier }: { tier: (typeof tiers)[number] }) {
 }
 
 function SponsorsPage() {
-  // const buttonStyle = {
-  //   marginInline: 30,
-  //   marginBlock: 10,
-  //   padding: 10,
-  //   backgroundColor: "#664381",
-  //   color: "#FFFFFF",
-  //   display: "inline-block",
-  // };
+  const buttonStyle = {
+    marginInline: 30,
+    marginBlock: 10,
+    padding: 10,
+    backgroundColor: "#664381",
+    color: "#FFFFFF",
+    display: "inline-block",
+  };
 
   return (
     <div
@@ -172,14 +172,16 @@ function SponsorsPage() {
           Want to support our cause? Become a sponsor! Our strong performances in previous BIOMOD
           competitions wouldn't be possible without sponsors like you.
         </p>
-        {/* <div style={{ marginTop: 35 }}>
-          <a href={SPONSORSHIP_PACKAGE_URL || undefined} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+        <div style={{ marginTop: 35 }}>
+          {/* <a href={SPONSORSHIP_PACKAGE_URL || undefined} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
             SPONSORSHIP PACKAGE
-          </a>
+          </a> */}
+        
           <a href={BECOME_A_SPONSOR_URL || undefined} style={buttonStyle}>
             BECOME A SPONSOR!
           </a>
-        </div> */}
+        </div>
+        
       </div>
     </div>
   );
