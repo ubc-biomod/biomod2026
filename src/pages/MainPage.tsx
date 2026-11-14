@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import dna2Img from "../assets/images/DNA2.png";
-import diagram from "../assets/images/what_does_it_even_do.png";
+import diagram from "../assets/images/page2_graphic_fixed.png";
 import Three from "../components/Three";
 import WorldMap, { type CountryConfig } from "../components/WorldMap";
 import BarChart from "../components/BarChart";

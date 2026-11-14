@@ -26,7 +26,10 @@ export default function Three() {
     const loader = new GLTFLoader();
 
     let model: THREE.Object3D | undefined;
-    const clueModels: THREE.Object3D[] = [];
+    const clueItems: Array<{
+      model: THREE.Object3D;
+      rotationDelta: { x: number; y: number; z: number };
+    }> = [];
 
     loader.load(
       "/biomod_detective.glb",
@@ -39,17 +42,19 @@ export default function Three() {
     );
 
     [
-      { path: "/clue1.glb", position: new THREE.Vector3(-2.3, 0, 0), scale: 1.3 },
-      { path: "/clue2.glb", position: new THREE.Vector3(2.3, 0, 0), scale: 1.3 },
-    ].forEach(({ path, position, scale }) => {
+      { path: "/clue1.glb", scale: 0.7, position: { x: 0, y: 2.5, z: 0 }, rotation: { x: Math.PI / 2, y: 0, z: 0 }, rotation_delta: { x: 0, y: 0.005, z: 0.01 } },
+      { path: "/clue2.glb", scale: 0.7, position: { x: 0, y: 2.5, z: 0 }, rotation: { x: Math.PI / 2, y: 10, z: 20 }, rotation_delta: { x: 0, y: 0.005, z: 0.01 } },
+      { path: "/clue1.glb", scale: 0.7, position: { x: 0, y: 2.5, z: 0 }, rotation: { x: Math.PI / 2, y: 20, z: 10 }, rotation_delta: { x: 0, y: 0.003, z: 0.012 } },
+      { path: "/clue2.glb", scale: 0.7, position: { x: 0, y: 2.5, z: 0 }, rotation: { x: Math.PI / 2, y: 5, z: 15 }, rotation_delta: { x: 0, y: 0.003, z: 0.012 } },
+    ].forEach(({ path, scale, position, rotation, rotation_delta }) => {
       loader.load(
         path,
         (gltf: GLTF) => {
           const clueModel = gltf.scene;
-          clueModel.position.copy(position);
-          clueModel.rotation.x = Math.PI / 2;
           clueModel.scale.setScalar(scale);
-          clueModels.push(clueModel);
+          clueModel.position.set(position.x, position.y, position.z);
+          clueModel.rotation.set(rotation.x, rotation.y, rotation.z);
+          clueItems.push({ model: clueModel, rotationDelta: rotation_delta });
           scene.add(clueModel);
           console.log("Clue model loaded successfully:", clueModel);
         },
@@ -82,9 +87,10 @@ export default function Three() {
         model.rotation.y += 0.006;
       }
 
-      clueModels.forEach((clueModel) => {
-        clueModel.rotation.y += 0.006;
-        clueModel.rotation.x = Math.PI / 2;
+      clueItems.forEach(({ model: clueModel, rotationDelta }) => {
+        clueModel.rotation.x += rotationDelta.x;
+        clueModel.rotation.y += rotationDelta.y;
+        clueModel.rotation.z += rotationDelta.z;
       });
 
       renderer.render(scene, camera);
