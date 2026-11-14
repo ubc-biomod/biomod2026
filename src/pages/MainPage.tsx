@@ -300,8 +300,8 @@ const CARDS: Array<{
     children: (
       <div className="flex w-full justify-center">
         <iframe
-          title="Project video"
-          src="https://www.youtube.com/embed/krcnwXdkRuU?si=3uzEiIuDTUkkHPDK"
+          title="UBC BIOMOD 2026: RNA-Based Detector for Cancer"
+          src="https://www.youtube.com/embed/kDqlU5cI6e0?si=_QeLSiUSY4zENNpy"
           className="aspect-video w-full rounded-xl drop-shadow transition-all duration-300 hover:drop-shadow-xl hover:scale-[1.01]"
         />
       </div>
